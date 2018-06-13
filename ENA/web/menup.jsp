@@ -27,7 +27,7 @@
     </head>
     <body>
         
-        <div id="m">
+        <div class="m">
             <h1> Menú Principal </h1> 
             
             <form action="ingresarr.jsp"> 
