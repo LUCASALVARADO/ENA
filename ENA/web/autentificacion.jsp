@@ -13,8 +13,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div>
-            <h1> Autentificacion </h1>
+        <div id="m">
+            <h1> Autentificación </h1>
             <form >
                 <p> Usuario <input type="text" name="user"> </p>
                 <p> Password <input type="pass" name="pass"> </p>

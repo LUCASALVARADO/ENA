@@ -18,12 +18,17 @@
                 margin: 2%;
             }
             
+            input {
+                width: 250px;
+                padding: 1%;
+            }
+            
         </style>
     </head>
     <body>
         
-        <div>
-            <h1> Menu Principal </h1> 
+        <div id="m">
+            <h1> Menú Principal </h1> 
             
             <form action="ingresarr.jsp"> 
                 <input type="submit" value="Ingresar Requerimiento"> 

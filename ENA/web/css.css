@@ -8,14 +8,7 @@ and open the template in the editor.
     Author     : lucas
 */
 
-div {
-    border-style: solid;
-    width: 50%;
-    padding-left:  5px;
-    padding-right:  5px;
-    padding-bottom:  20px;
-}
-            
+
 h1 {
     border-bottom: solid;
     margin-top: 0px;
