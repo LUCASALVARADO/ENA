@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div id="m">
+        <div class="m">
             <h1> Autentificación </h1>
             <form >
                 <p> Usuario <input type="text" name="user"> </p>
