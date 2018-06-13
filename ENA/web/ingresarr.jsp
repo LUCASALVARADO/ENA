@@ -12,30 +12,32 @@
         <link rel="stylesheet" type="text/css" href="css.css">
         <title>JSP Page</title>
         <style>
-            .f1 .f2 {
+            
+            .f {
                 display: inline-block;
                 width: 40%;
             }
         </style>
     </head>
     <body>
-        <div id="menu">
+        <div class="m">
             <h1> Ingresar Requerimiento </h1>
             <form>
-                <div id="f1">   
-                    Gerencia:  
-                    Depto: 
-                    Asignar a:  
-                    Encargado:  
-                    Requerimiento: 
+                <div class="f">   
+                    <p> Gerencia: </p>  
+                    <p> Depto: </p>
+                    <p> Asignar a: </p> 
+                    <p> Encargado: </p> 
+                    <p> Requerimiento: </p>
                 </div>    
-                <div id="f2">
-                    <select name="gerencia"> </select>
-                    <select name="depto"> </select> 
-                    <select name="asignar"> </select> 
-                    <select name="encargado"> </select> 
-                    <textarea name="requerimiento" rows="10" cols="50"> Ingrese requerimientos 
-                                   </textarea>
+                <div class="f">
+                    <p> <select name="gerencia"> </select> </p>
+                    <p> <select name="depto"> </select> </p>
+                    <p> <select name="asignar"> </select> </p>
+                    <p> <select name="encargado"> </select> </p>
+                    <p> <textarea name="requerimiento" rows="10" cols="50"> Ingrese requerimientos 
+                        </textarea> 
+                    </p>    
                 </div>    
             </form>
         </div>
