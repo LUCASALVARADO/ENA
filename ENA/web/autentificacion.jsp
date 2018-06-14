@@ -15,7 +15,7 @@
     <body>
         <div class="m">
             <h1> Autentificación </h1>
-            <form >
+            <form action="menup.jsp" >
                 <p> Usuario <input type="text" name="user"> </p>
                 <p> Password <input type="pass" name="pass"> </p>
                 <p> <input type="checkbox" name="remember"> Recordar  </p>

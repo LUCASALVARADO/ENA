@@ -15,31 +15,55 @@
             
             .f {
                 display: inline-block;
-                width: 40%;
+                vertical-align: top;
+                width: 20%;
             }
+            
+            .i {
+                padding: 5%;
+            }    
         </style>
     </head>
     <body>
         <div class="m">
             <h1> Ingresar Requerimiento </h1>
             <form>
-                <div class="f">   
+                <div class="f"> 
                     <p> Gerencia: </p>  
                     <p> Depto: </p>
                     <p> Asignar a: </p> 
                     <p> Encargado: </p> 
                     <p> Requerimiento: </p>
+                    
                 </div>    
                 <div class="f">
-                    <p> <select name="gerencia"> </select> </p>
-                    <p> <select name="depto"> </select> </p>
-                    <p> <select name="asignar"> </select> </p>
-                    <p> <select name="encargado"> </select> </p>
-                    <p> <textarea name="requerimiento" rows="10" cols="50"> Ingrese requerimientos 
+                    <p> <select name="gerencia">
+                            <option> Seleccionar </option>
+                        </select> </p>
+                    <p> <select name="depto">
+                            <option> Seleccionar </option>
+                        </select> </p>
+                    <p> <select name="asignar"> 
+                            <option> Seleccionar </option>
+                        </select> </p>
+                    <p> <select name="encargado"> 
+                            <option> Seleccionar </option>
+                        </select> </p>
+                    <p> <textarea name="requerimiento" rows="10" cols="30"> Ingrese requerimientos 
                         </textarea> 
                     </p>    
-                </div>    
+                </div>
             </form>
+            <div class="f">
+                <form>
+                    <input class="i" type="submit" value="Guardar">
+                </form>
+            </div>
+            <div class="f">
+                <form action="menup.jsp">
+                    <input class="i "type="submit" value="Volver al Menú">
+                </form>
+            </div>
         </div>
     </body>
 </html>
