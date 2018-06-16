@@ -3,7 +3,7 @@
     Created on : 12-06-2018, 22:36:52
     Author     : lucas
 --%>
-
+<%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@
     <body>
         <div class="m" id="m2">
             <h1> Consultar Requerimientos </h1>
-            <form>
+            <form action="consultarr2.jsp">
                 <div class="f"> 
                     <p> Gerencia: </p>  
                     <p> Depto: </p>
@@ -41,14 +41,31 @@
                     
                 </div>    
                 <div class="f">
-                    <p> <select name="gerencia">
-                            <option> Todo </option>
+    <% 
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ena","root","");
+        String query = "SELECT n_gerencia FROM gerencia";
+        String query2 = "SELECT n_asignacion FROM asignacion";
+        Statement st = conn.createStatement();
+    %>
+                    <p> <select name="gerencia" action="" onchange="showDepto(this.value)">
+                            <option value="Todo"> Todo </option>
+                            <% ResultSet rs = st.executeQuery(query);
+                                while(rs.next()){
+                                    out.print("<option value=\""+rs.getString("n_gerencia")+"\">"+rs.getString("n_gerencia")+"</option>");
+                                }
+                            %>
                         </select> </p>
-                    <p> <select name="depto">
+                    <p> <select name="depto" id="depto">
                             <option> Todo </option>
                         </select> </p>
                     <p> <select name="asignar"> 
                             <option> Todo </option>
+                            <% rs = st.executeQuery(query2);
+                                while(rs.next()){
+                                    out.print("<option value=\""+rs.getString("n_asignacion")+"\">"+rs.getString("n_asignacion")+"</option>");
+                                }
+                            %>                            
                         </select> </p>
                 </div>
                 <div class="f" id="bf">
@@ -62,24 +79,11 @@
                     <th> Asignado a</th>
                     <th> Requerimiento </th>
                 </tr>
-                <tr>
-                    <td> XXXXXXX</td>
-                    <td> XXXXXXX</td>                    
-                    <td> XXXXXXX</td>                    
-                    <td> XXXXXXX</td>   
-                </tr>
-                <tr>
-                    <td> XXXXXXX</td>
-                    <td> XXXXXXX</td>                    
-                    <td> XXXXXXX</td>                    
-                    <td> XXXXXXX</td>
-                </tr>
-                <tr>
-                    <td> XXXXXXXXXXXXXXXXXXXXX</td>
-                    <td> XXXXXXXXXXXXXXXXXXXXX</td>                    
-                    <td> XXXXXXXXXXXXXXXXXXXXX</td>                    
-                    <td> XXXXXXXXXXXXXXXXXXXXX</td>
-                </tr>
+                    <% 
+                    if(request.getAttribute("msg2")!=null){
+                        out.println(request.getAttribute("msg2"));
+                    }
+                    %>  
             </table>
             <div class="f">
                 <form action="menup.jsp">
@@ -87,5 +91,26 @@
                 </form>
             </div>
         </div>
+        <script>
+            function showDepto(str) {
+              var xhttp;    
+              if (str === "Todo") {
+                document.getElementById("depto").innerHTML = "<option>Todo</option>";
+                return;
+              }
+              xhttp = new XMLHttpRequest();
+              
+              xhttp.onreadystatechange = function () {
+                if((xhttp.readyState == 4) || (xhttp.status == 200)) {
+                    document.getElementById("depto").innerHTML = xhttp.responseText;
+                }else if(xhttp.status == 400){
+                    alert("Error 400");
+                }
+             };
+              xhttp.open("POST", "aj.jsp?id=3&q="+str, true);
+              xhttp.send(null);
+              
+            }
+        </script>
     </body>
 </html>

@@ -3,7 +3,7 @@
     Created on : 12-06-2018, 22:36:41
     Author     : lucas
 --%>
-
+<%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -27,26 +27,49 @@
     <body>
         <div class="m">
             <h1> Ingresar Requerimiento </h1>
-            <form>
+            <% 
+            if(request.getAttribute("msg")!=null){
+                out.println(request.getAttribute("msg"));
+            }
+            %>
+            <form action="ingresard.jsp">
                 <div class="f"> 
                     <p> Gerencia: </p>  
                     <p> Depto: </p>
                     <p> Asignar a: </p> 
                     <p> Encargado: </p> 
                     <p> Requerimiento: </p>
-                    
+                    <input class="i" type="submit" value="Guardar">
                 </div>    
                 <div class="f">
-                    <p> <select name="gerencia">
-                            <option> Seleccionar </option>
+    <% 
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ena","root","");
+        String query = "SELECT n_gerencia FROM gerencia";
+        String query2 = "SELECT n_asignacion FROM asignacion";
+        Statement st = conn.createStatement();
+    %>
+                    <p> <select name="gerencia" onchange="showDepto(this.value)">
+                            <option value="Seleccionar"> Seleccionar </option>
+                            <% ResultSet rs = st.executeQuery(query);
+                                while(rs.next()){
+                                    out.print("<option value=\""+rs.getString("n_gerencia")+"\">"+rs.getString("n_gerencia")+"</option>");
+                                }
+                            %>
                         </select> </p>
-                    <p> <select name="depto">
+                    <p> <select name="depto" id="depto">
                             <option> Seleccionar </option>
+                            
                         </select> </p>
-                    <p> <select name="asignar"> 
-                            <option> Seleccionar </option>
+                    <p> <select name="asignar"  onchange="showEncargado(this.value)"> 
+                            <option value="Seleccionar"> Seleccionar </option>
+                            <% rs = st.executeQuery(query2);
+                                while(rs.next()){
+                                    out.print("<option value=\""+rs.getString("n_asignacion")+"\">"+rs.getString("n_asignacion")+"</option>");
+                                }
+                            %>
                         </select> </p>
-                    <p> <select name="encargado"> 
+                    <p> <select name="encargado" id="encargado"> 
                             <option> Seleccionar </option>
                         </select> </p>
                     <p> <textarea name="requerimiento" rows="10" cols="30"> Ingrese requerimientos 
@@ -55,9 +78,7 @@
                 </div>
             </form>
             <div class="f">
-                <form>
-                    <input class="i" type="submit" value="Guardar">
-                </form>
+                
             </div>
             <div class="f">
                 <form action="menup.jsp">
@@ -65,5 +86,46 @@
                 </form>
             </div>
         </div>
+        <script>
+            function showDepto(str) {
+              var xhttp;    
+              if (str === "Seleccionar") {
+                document.getElementById("depto").innerHTML = "<option>Seleccionar</option>";
+                return;
+              }
+              xhttp = new XMLHttpRequest();
+              
+              xhttp.onreadystatechange = function () {
+                if((xhttp.readyState == 4) || (xhttp.status == 200)) {
+                    document.getElementById("depto").innerHTML = xhttp.responseText;
+                }else if(xhttp.status == 400){
+                    alert("Error 400");
+                }
+             };
+              xhttp.open("POST", "aj.jsp?id=1&q="+str, true);
+              xhttp.send(null);
+              
+            }
+            
+            function showEncargado(str) {
+              var xhttp;    
+              if (str === "Seleccionar") {
+                document.getElementById("encargado").innerHTML = "<option>Seleccion</option>";
+                return;
+              }
+              xhttp = new XMLHttpRequest();
+              
+              xhttp.onreadystatechange = function () {
+                if((xhttp.readyState == 4) || (xhttp.status == 200)) {
+                    document.getElementById("encargado").innerHTML = xhttp.responseText;
+                }else if(xhttp.status == 400){
+                    alert("Error 400");
+                }
+             };
+              xhttp.open("POST", "aj.jsp?id=2&q="+str, true);
+              xhttp.send(null);
+              
+            }
+        </script>
     </body>
 </html>
